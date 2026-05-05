@@ -38,6 +38,9 @@ Every project repo follows the same structure:
 Hypothesis IDs (`H-NNNN`) and finding IDs (`F-NNNN`) are managed by
 the `bsec` CLI from the bitwize-security plugin.
 
+For the full campaign creation, scaffold, and portfolio update checklist, see
+[`TRACKING.md`](TRACKING.md).
+
 ## Discovery
 
 - **All projects:** [`https://github.com/topics/vuln-research`](https://github.com/topics/vuln-research)

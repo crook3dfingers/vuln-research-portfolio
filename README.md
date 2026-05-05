@@ -1,0 +1,70 @@
+# Vulnerability research portfolio
+
+Index of vulnerability-research campaigns by Lane Crawford / Tarmo
+Technologies. Each project is its own repo (sortable, scannable,
+selectively cloneable). All project repos carry the GitHub topic
+`vuln-research` for portfolio-wide discovery:
+**[github.com/topics/vuln-research](https://github.com/topics/vuln-research)**.
+
+## Active / recent campaigns
+
+| Campaign | Repo | Status | Headline finding(s) |
+|---|---|---|---|
+| **DDS middleware** (Fast-DDS, CycloneDDS, OpenDDS, RTI Connext) | [`vuln-research-dds`](https://github.com/crook3dfingers/vuln-research-dds) | 20+ findings, 2 in-process RIP-control proofs on hardened builds | Pre-auth network OOB-READ on Fast-DDS (default ROS 2 Humble/Jazzy RMW); pre-auth network heap-OOB-write on CycloneDDS; auth-plugin race UAFs on Fast-DDS + CycloneDDS |
+| **GPSD + receiver protocols** (NMEA, AIS, u-blox, RTCM) | [`vuln-research-gpsd`](https://github.com/crook3dfingers/vuln-research-gpsd) | F-0002 multi-vector; ASLR-bypass + alt-vector branches | Pre-auth memory corruption with single-packet RF / USB / network delivery vectors |
+| **TAK ecosystem** (TAK Server, ATAK CIV, WinTAK, iTAK) | [`vuln-research-tak`](https://github.com/crook3dfingers/vuln-research-tak) | Pre-auth RCE campaign | Reserved — see repo for current state |
+| **Samsung Shannon LTE baseband + Pixel 10 GSA Trusty TEE** | [`vuln-research-baseband-shannon`](https://github.com/crook3dfingers/vuln-research-baseband-shannon) | FirmWire emulation campaign + TEE audit | Pre-auth wireless RCE research |
+| **dump1090 / readsb** (ADS-B receivers) | [`vuln-research-dump1090`](https://github.com/crook3dfingers/vuln-research-dump1090) | H-0046 + H-0047 RCE chain demos | RCE-class chain with ASan-confirmed primitives |
+| **BlueZ** (Linux Bluetooth stack) | [`vuln-research-bluez`](https://github.com/crook3dfingers/vuln-research-bluez) | Scoped, scaffold-only | Pre-auth attack-surface audit pending |
+| **MAVLink ground-control stations** (Mission Planner, QGroundControl, MAVLink C library) | [`vuln-research-mavlink-gcs`](https://github.com/crook3dfingers/vuln-research-mavlink-gcs) | Scoped, scaffold-only | Drone-link / GCS protocol surface audit pending |
+| **NTRIP + RTKLib** (precise GNSS / RTK) | [`vuln-research-ntrip-rtklib`](https://github.com/crook3dfingers/vuln-research-ntrip-rtklib) | Scoped, scaffold-only | NTRIP server / caster + RTK receiver audit pending |
+
+## Conventions
+
+Every project repo follows the same structure:
+
+```
+<repo>/
+├── AUTHORIZATION.md            # scope, target inventory, threat model, disclosure timeline
+├── README.md                   # quick-orient: targets, status, headline findings
+├── evidence/                   # per-hypothesis writeups (one dir per H-NNNN)
+├── submissions/                # disclosure-ready advisories + ELI5 docs
+├── notes/                      # methodology notes, prior-art mapping, IDL audits
+├── harnesses/                  # fuzz / instrumentation harness sources
+├── scratch/                    # exploit-primitive repros + chain demos (sources only — binaries excluded by .gitignore)
+└── corpus/                     # small fixture / test data
+```
+
+Hypothesis IDs (`H-NNNN`) and finding IDs (`F-NNNN`) are managed by
+the `bsec` CLI from the bitwize-security plugin.
+
+## Discovery
+
+- **All projects:** [`https://github.com/topics/vuln-research`](https://github.com/topics/vuln-research)
+- **By owner:** [`https://github.com/crook3dfingers?tab=repositories&q=vuln-research`](https://github.com/crook3dfingers?tab=repositories&q=vuln-research)
+
+## Why repo-per-campaign rather than monorepo
+
+Each campaign carries:
+
+- Its own `AUTHORIZATION.md` and disclosure timeline
+- Multi-GB of scratch / build artifacts (excluded from git but tracked locally)
+- Distinct vendor relationships, target inventory, threat model
+
+Repo-per-campaign lets each disclosure flip public independently,
+keeps `git clone` bounded, and makes the portfolio scannable. The
+shared `vuln-research` topic + this index repo provide the
+"easily tied together" affordance.
+
+## Methodology
+
+Each campaign uses the bitwize-security plugin's hypothesis-driven
+workflow:
+
+1. `bsec project new <slug>` — scope + authorization
+2. `bsec hyp new <slug> "<title>" --class <class> --priority P0..P4`
+3. Drive each hypothesis through gates: HYPOTHESIS → SINK_CONFIRMED →
+   SOURCE_CONFIRMED → PATH_VALIDATED → RUNTIME_CONFIRMED
+4. `bsec finding promote H-NNNN` once RUNTIME_CONFIRMED → finding gets
+   an F-NNNN identifier
+5. Write advisory + ELI5; track in `submissions/`

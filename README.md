@@ -18,6 +18,7 @@ selectively cloneable). All project repos carry the GitHub topic
 | **BlueZ** (Linux Bluetooth stack) | [`vuln-research-bluez`](https://github.com/crook3dfingers/vuln-research-bluez) | Scoped, scaffold-only | Pre-auth attack-surface audit pending |
 | **MAVLink ground-control stations** (Mission Planner, QGroundControl, MAVLink C library) | [`vuln-research-mavlink-gcs`](https://github.com/crook3dfingers/vuln-research-mavlink-gcs) | Scoped, scaffold-only | Drone-link / GCS protocol surface audit pending |
 | **NTRIP + RTKLib** (precise GNSS / RTK) | [`vuln-research-ntrip-rtklib`](https://github.com/crook3dfingers/vuln-research-ntrip-rtklib) | Scoped, scaffold-only | NTRIP server / caster + RTK receiver audit pending |
+| **Civil avionics** (Honeywell Primus, Collins Pro Line, Garmin GTN/G1000, Thales TopFlight, ARINC 424 / AIXM / ADS-B 1090ES / CPDLC parsers) | _local-only `projects/civil-avionics/`_ | **Planning** — `NEXT-TARGET.md` scoping doc | FAA/EASA DO-178C-cert avionics firmware as parser-bug-class target. Static + emulated + Faraday-shielded research path. Authorization framing TBD before any dynamic work begins. |
 
 ## Conventions
 

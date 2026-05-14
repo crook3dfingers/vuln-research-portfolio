@@ -19,6 +19,8 @@ selectively cloneable). All project repos carry the GitHub topic
 | **MAVLink ground-control stations** (Mission Planner, QGroundControl, MAVLink C library) | [`vuln-research-mavlink-gcs`](https://github.com/crook3dfingers/vuln-research-mavlink-gcs) | Scoped, scaffold-only | Drone-link / GCS protocol surface audit pending |
 | **NTRIP + RTKLib** (precise GNSS / RTK) | [`vuln-research-ntrip-rtklib`](https://github.com/crook3dfingers/vuln-research-ntrip-rtklib) | Scoped, scaffold-only | NTRIP server / caster + RTK receiver audit pending |
 | **Civil avionics** (Honeywell Primus, Collins Pro Line, Garmin GTN/G1000, Thales TopFlight, ARINC 424 / AIXM / ADS-B 1090ES / CPDLC parsers) | _local-only `projects/civil-avionics/`_ | **Planning** — `NEXT-TARGET.md` scoping doc | FAA/EASA DO-178C-cert avionics firmware as parser-bug-class target. Static + emulated + Faraday-shielded research path. Authorization framing TBD before any dynamic work begins. |
+| **Files.com** (HackerOne — managed file transfer) | _local-only `projects/files-com/`_ | **Scoped** — H1 bug-bounty, validation target for bsec + pentest-storm + pentest-scribe + govfuzz stack integration | On-Premise Agent + Desktop v4/v6 + CLI + REST API as unauth-RCE attack surface. MFT-category adjacent CVE history (MOVEit, GoAnywhere, Cleo). |
+| **GitLab** (HackerOne — DevOps platform) | private `vuln-research-gitlab` | **Scoped** — H1 bug-bounty, open-scope CVSS-based rewards | Rails monorepo + Gitaly / gitlab-shell / gitlab-pages / gitlab-runner Go services + container registry + customers.gitlab.com. CVSS-Critical target classes: Banzai markdown / asset pipeline, Git RPC surface, import / export pipelines, CI/CD interpolation, registry manifest handling. |
 
 ## Conventions
 
